@@ -26,7 +26,13 @@ class CartController extends Controller
 
     public function removeProduct($productId)
     {
+        // Получаем корзину пользователя
         $cart = auth()->user()->cart;
+
+        // Проверяем, есть ли корзина
+        if (!$cart) {
+            return response()->json(['error' => 'Корзина не найдена'], 404);
+        }
         $cart->products()->detach($productId);
 
         return response()->json(['message' => 'Товар удален из корзины']);
