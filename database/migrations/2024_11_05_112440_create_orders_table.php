@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['На оплату', 'Оплачен', 'Отменен'])->default('На оплату');
+            $table->foreignId('payment_method_id')->constrained('payment_methods');
             $table->timestamps();
         });
     }
